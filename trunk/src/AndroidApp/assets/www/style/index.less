@@ -1,0 +1,417 @@
+button:hover, .button:hover, input[type="button"]:hover {
+    background-image: -webkit-linear-gradient(90deg, hsla(0,0%,0%,.08),hsla(0,0%,0%,.03));
+}
+
+#SeriesView {
+    .TabContentWrapper {
+        top: 0px;
+    }
+
+    .TabContent {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.Page {
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.GlassButton {
+    border: 1px solid rgba(0,0,0,0.5);
+    border-bottom: 3px solid rgba(0,0,0,0.5);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background: rgba(0,0,0,0.25);
+    -moz-box-shadow: 0 2px 8px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+    -o-box-shadow: 0 2px 8px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.5), inset 0 1px rgba(255,255,255,0.3), inset 0 10px rgba(255,255,255,0.2), inset 0 10px 20px rgba(255,255,255,0.25), inset 0 -15px 30px rgba(0,0,0,0.3);
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+html {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background: -ms-linear-gradient(left, rgba(69, 72, 77, 1) 0%,rgba(0, 0, 0, 1) 100%);
+    background: -o-linear-gradient(left, rgba(69, 72, 77, 1) 0%,rgba(0, 0, 0, 1) 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(69, 72, 77, 1)), color-stop(100%, rgba(0, 0, 0, 1)));
+    background: -webkit-linear-gradient(left, rgba(69, 72, 77, 1) 0%,rgba(0, 0, 0, 1) 100%) !important;
+    background: linear-gradient(to right, rgba(69, 72, 77, 1) 0%, rgba(0, 0, 0, 1) 100%);
+    background: rgb(69, 72, 77);
+    color: white;
+    font-family: Verdana, Arial, Geneva, 'DejaVu Sans', sans-serif;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#45484d',endColorstr='#000000', GradientType=1);
+}
+
+#SearchTextBox {
+    width: 100%;
+    height: 100%;
+    border: 0px;
+    font-style: italic;
+    font-size: 16px;
+}
+
+h1, h2, p {
+    color: #fff;
+    color: rgba(255, 255, 255, 0.75);
+    text-align: left;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+h4 {
+    margin: 3px;
+}
+
+button, .button, input[type="button"] {
+    padding: 0 30px 0 30px;
+    height: 48px;
+    border: none;
+    border-radius: 3px;
+    background-color: #f4f4f4;
+    background-image: -webkit-linear-gradient(90deg, hsla(0,0%,0%,.05), hsla(0,0%,0%,.01));
+    box-shadow: inset 0 1px 0 hsla(0,0%,100%,.25), 0 1px 2px hsla(0,0%,0%,0.5);
+    cursor: pointer;
+    -webkit-transition: .1s;
+}
+
+.TabPage {
+    bottom: 0px;
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+h1:hover {
+    cursor: text;
+}
+
+body {
+    position: absolute;
+    overflow: hidden;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+.ThumbnailInList {
+    width: 80px;
+    height: 100%;
+}
+
+button:active, .button:active, input[type="button"]:active {
+    background-image: -webkit-linear-gradient(90deg, hsla(0,0%,0%,.15), hsla(0,0%,0%,.12));
+    color: #333;
+    -webkit-text-shadow: 0 1px 0 hsla(0,0%,100%,.25);
+    text-shadow: 0 1px 0 hsla(0,0%,100%,.25);
+}
+
+#ListTabContent {
+    .TabPageContent {
+        top: 50px;
+    }
+}
+
+.TabPageContent {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    display: inline-block;
+    overflow-y: auto;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+.TabPageHeader {
+    position: absolute;
+    top: 0px;
+    right: 2%;
+    left: 0px;
+    margin: 0px;
+    width: 96%;
+    height: 90%;
+}
+
+.TabContentWrapper {
+    position: absolute;
+    top: 15%;
+    bottom: 0%;
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+#TabItems {
+    position: absolute;
+    top: 0px;
+    display: inline-block;
+    padding: 0px;
+    width: 100%;
+    height: 15%;
+
+    ul {
+        margin: 0px;
+        padding: 0px;
+        width: 100%;
+        height: 100%;
+        list-style: none;
+    }
+
+    .MenuItem {
+        img {
+            position: absolute;
+            left: 2%;
+            width: 20%;
+            height: 80%;
+        }
+
+        .MenuItemText {
+            position: absolute;
+            left: 24%;
+            display: block;
+            margin: 0;
+            width: 72%;
+            height: 90%;
+        }
+
+        * {
+            display: block;
+        }
+    }
+}
+
+.ActivePage {
+    display: block;
+}
+
+table {
+    width: 100%;
+
+    tr {
+        width: 100%;
+
+        td {
+            margin: 0px;
+        }
+    }
+}
+
+p {
+    margin: 0px;
+    padding: 0px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+button.smallthreeD, .button .smallthreeD, input[type="button"].bsmallthreeD {
+    padding-bottom: 3px;
+    height: 35px;
+    box-shadow: inset 0 1px 0 hsla(0,0%,100%,.25), inset 0 -3px 0 hsla(0,0%,0%,.15), 0 1px 2px hsla(0,0%,0%,0.5);
+}
+
+td.SeriesInfoInList {
+    margin: 10px;
+    width: 300px;
+    height: 100%;
+}
+
+#SearchTabContent {
+    .TabPageContent {
+        top: 100px;
+    }
+}
+
+#MangaSeriesInfoTabContent {
+    .MangaChapterList {
+        position: absolute;
+        top: 260px;
+        right: 0px;
+        bottom: 0px;
+        left: 20px;
+        display: inline-block;
+        overflow-y: auto;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .TabPageContent {
+        top: 20px;
+    }
+
+    & > .TabPageContent {
+        & > div:first-child {
+            overflow-y: auto;
+            height: 250px;
+        }
+    }
+}
+
+.fulldefault {
+    width: 100%;
+    height: 100%;
+}
+
+button.small, .button .bsmall, input[type="button"].bsmall {
+    height: 32px;
+}
+
+#List17PlusTabContent {
+    .TabPageContent {
+        top: 50px;
+    }
+}
+
+#ListNewTabContent {
+    .TabPageContent {
+        top: 50px;
+    }
+}
+
+#SearchBtn {
+    width: 90%;
+    padding: 5%;
+    height: 90%;
+    text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
+}
+
+.fullheight {
+    height: 100%;
+}
+
+button.smallthreeD:active, .button .smallthreeD:active, input[type="button"].smallthreeD:active {
+    position: relative;
+    top: 1px;
+    height: 35px;
+    box-shadow: inset 0 1px 0 hsla(0,0%,100%,.25), inset 0 -1px 0 hsla(0,0%,0%,.3), 0 1px 2px hsla(0,0%,0%,0.75);
+}
+
+button.threeD:active, .button .threeD:active, input[type="button"].threeD:active {
+    position: relative;
+    top: 1px;
+    height: 51px;
+    box-shadow: inset 0 1px 0 hsla(0,0%,100%,.25), inset 0 -2px 0 hsla(0,0%,0%,.3), 0 1px 2px hsla(0,0%,0%,0.75);
+}
+
+button.threeD, .button .threeD, input[type="button"].threeD {
+    padding-bottom: 4px;
+    height: 52px;
+    box-shadow: inset 0 1px 0 hsla(0,0%,100%,.25), inset 0 -4px 0 hsla(0,0%,0%,.15), 0 1px 2px hsla(0,0%,0%,0.5);
+}
+
+.PageList {
+    ul {
+        list-style-type: none;
+
+        li {
+            text-align: center;
+        }
+    }
+}
+
+ul.MangaSeriesList {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+
+    & > li {
+        width: 100%;
+    }
+
+    div.MangaSeriesInfoList {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+#HomeView {
+    .TabContent {
+        position: absolute;
+        top: 0px;
+        right: 2%;
+        left: 2%;
+        width: 96%;
+        height: 100%;
+    }
+
+    .TabContainer {
+        height: 100%;
+    }
+}
+
+h1:focus {
+    outline: none;
+}
+
+h1 {
+    margin: 0;
+    color: #fff;
+    -webkit-text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+    text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbbbbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaaaaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2), 0 20px 20px rgba(0, 0, 0, 0.15);
+    -webkit-transition: .2s all linear;
+    -moz-transition: .2s all linear;
+    -o-transition: .2s all linear;
+    transition: .2s all linear;
+}
+
+#BusyIndicator {
+    img {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+
+    div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+        width: 102px;
+        height: 102px;
+        background: transparent url(../img/LoadingCircle.png) 0 0 no-repeat;
+    }
+}
+
+#SearchBtnCell {
+    margin: 0px;
+    padding: 0px;
+    width: 50px;
+    height: 50px;
+}
+
+#ChapterViewTabContent {
+    .TabPageContent {
+        top: 0px;
+    }
+}
+
+.fullinherit {
+    position: inherit;
+    width: 100%;
+    height: 100%;
+}
+
+h2 {
+    margin: 10px;
+    margin: 30px 0 15px;
+    font-weight: 200;
+    font-size: 20px;
+    line-height: 25px;
+}

@@ -1,0 +1,6 @@
+﻿Try to re-register ASP.NET with aspnet_regiis -i. It worked for me.
+
+A likely path for .NET 4 (from elevated command prompt):
+
+c:\Windows\Microsoft.NET\Framework\v4.0.30319\aspnet_regiis.exe -i
+http://forums.iis.net/p/1190643/2026401.aspx

@@ -1,0 +1,1 @@
+ScanManga Manga24h Unknown /updateinfo /deep /usedb

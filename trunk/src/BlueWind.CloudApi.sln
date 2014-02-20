@@ -1,0 +1,124 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{544CA70C-E7C1-442E-8BD9-A8BC6A8D90F1}"
+	ProjectSection(SolutionItems) = preProject
+		nuget.config = nuget.config
+		..\..\..\..\..\AppData\Local\Microsoft\VisualStudio\11.0\Extensions\jozofqsu.luw\schemas\WE-Palette.css = ..\..\..\..\..\AppData\Local\Microsoft\VisualStudio\11.0\Extensions\jozofqsu.luw\schemas\WE-Palette.css
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueWind.CloudApi", "BlueWind.CloudApi\BlueWind.CloudApi.csproj", "{BB42ED4F-5C2A-4C3C-A338-1B5220B6C0D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScanManga", "..\..\..\BlueWind.Crawler\trunk\src\ScanManga\ScanManga.csproj", "{13A49288-96DE-431F-B03D-1A3A79E961E3}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "assets", "..\..\..\BlueWind.MangaSuite\trunk\src\assets\", "{29695485-BAAF-4B5D-B784-B171CB9D4836}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/assets"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\BlueWind.MangaSuite\assets\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\assets\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/assets"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\BlueWind.MangaSuite\assets\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\assets\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "14493"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueWind.Crawler.Manga", "..\..\..\BlueWind.Crawler\trunk\src\BlueWind.Crawler.Manga\BlueWind.Crawler.Manga.csproj", "{DB8F0402-E83F-4F39-8DC5-E80D9AD9B919}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueWind.Crawler.Core", "..\..\..\BlueWind.Crawler\trunk\src\BlueWind.Crawler.Core\BlueWind.Crawler.Core.csproj", "{01156AA0-1F56-4676-91C9-F634BD652FCD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueWind.CloudApi.SelfHost", "BlueWind.CloudApi.SelfHost\BlueWind.CloudApi.SelfHost.csproj", "{57E7A19F-AFBF-486A-9A56-338138B98E34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueWind.Common", "..\..\..\BlueWind.Mediator\trunk\src\BlueWind.Common\BlueWind.Common.csproj", "{4C617D42-F4E8-49BB-9303-9F7E73F8B657}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlueWind.WebCore", "BlueWind.WebCore\BlueWind.WebCore.csproj", "{8CF0D55B-D7FF-4E3A-9245-FB5ABB3CACAB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB42ED4F-5C2A-4C3C-A338-1B5220B6C0D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB42ED4F-5C2A-4C3C-A338-1B5220B6C0D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB42ED4F-5C2A-4C3C-A338-1B5220B6C0D0}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{BB42ED4F-5C2A-4C3C-A338-1B5220B6C0D0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BB42ED4F-5C2A-4C3C-A338-1B5220B6C0D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB42ED4F-5C2A-4C3C-A338-1B5220B6C0D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB42ED4F-5C2A-4C3C-A338-1B5220B6C0D0}.Release|ARM.ActiveCfg = Release|Any CPU
+		{BB42ED4F-5C2A-4C3C-A338-1B5220B6C0D0}.Release|x86.ActiveCfg = Release|Any CPU
+		{13A49288-96DE-431F-B03D-1A3A79E961E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13A49288-96DE-431F-B03D-1A3A79E961E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13A49288-96DE-431F-B03D-1A3A79E961E3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{13A49288-96DE-431F-B03D-1A3A79E961E3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{13A49288-96DE-431F-B03D-1A3A79E961E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13A49288-96DE-431F-B03D-1A3A79E961E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13A49288-96DE-431F-B03D-1A3A79E961E3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{13A49288-96DE-431F-B03D-1A3A79E961E3}.Release|x86.ActiveCfg = Release|Any CPU
+		{29695485-BAAF-4B5D-B784-B171CB9D4836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29695485-BAAF-4B5D-B784-B171CB9D4836}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{29695485-BAAF-4B5D-B784-B171CB9D4836}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{29695485-BAAF-4B5D-B784-B171CB9D4836}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{29695485-BAAF-4B5D-B784-B171CB9D4836}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{29695485-BAAF-4B5D-B784-B171CB9D4836}.Release|ARM.ActiveCfg = Debug|Any CPU
+		{29695485-BAAF-4B5D-B784-B171CB9D4836}.Release|x86.ActiveCfg = Debug|Any CPU
+		{DB8F0402-E83F-4F39-8DC5-E80D9AD9B919}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB8F0402-E83F-4F39-8DC5-E80D9AD9B919}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB8F0402-E83F-4F39-8DC5-E80D9AD9B919}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{DB8F0402-E83F-4F39-8DC5-E80D9AD9B919}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DB8F0402-E83F-4F39-8DC5-E80D9AD9B919}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB8F0402-E83F-4F39-8DC5-E80D9AD9B919}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB8F0402-E83F-4F39-8DC5-E80D9AD9B919}.Release|ARM.ActiveCfg = Release|Any CPU
+		{DB8F0402-E83F-4F39-8DC5-E80D9AD9B919}.Release|x86.ActiveCfg = Release|Any CPU
+		{01156AA0-1F56-4676-91C9-F634BD652FCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01156AA0-1F56-4676-91C9-F634BD652FCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01156AA0-1F56-4676-91C9-F634BD652FCD}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{01156AA0-1F56-4676-91C9-F634BD652FCD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{01156AA0-1F56-4676-91C9-F634BD652FCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01156AA0-1F56-4676-91C9-F634BD652FCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01156AA0-1F56-4676-91C9-F634BD652FCD}.Release|ARM.ActiveCfg = Release|Any CPU
+		{01156AA0-1F56-4676-91C9-F634BD652FCD}.Release|x86.ActiveCfg = Release|Any CPU
+		{57E7A19F-AFBF-486A-9A56-338138B98E34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57E7A19F-AFBF-486A-9A56-338138B98E34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57E7A19F-AFBF-486A-9A56-338138B98E34}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{57E7A19F-AFBF-486A-9A56-338138B98E34}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{57E7A19F-AFBF-486A-9A56-338138B98E34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57E7A19F-AFBF-486A-9A56-338138B98E34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57E7A19F-AFBF-486A-9A56-338138B98E34}.Release|ARM.ActiveCfg = Release|Any CPU
+		{57E7A19F-AFBF-486A-9A56-338138B98E34}.Release|x86.ActiveCfg = Release|Any CPU
+		{4C617D42-F4E8-49BB-9303-9F7E73F8B657}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C617D42-F4E8-49BB-9303-9F7E73F8B657}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C617D42-F4E8-49BB-9303-9F7E73F8B657}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{4C617D42-F4E8-49BB-9303-9F7E73F8B657}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4C617D42-F4E8-49BB-9303-9F7E73F8B657}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C617D42-F4E8-49BB-9303-9F7E73F8B657}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C617D42-F4E8-49BB-9303-9F7E73F8B657}.Release|ARM.ActiveCfg = Release|Any CPU
+		{4C617D42-F4E8-49BB-9303-9F7E73F8B657}.Release|x86.ActiveCfg = Release|Any CPU
+		{8CF0D55B-D7FF-4E3A-9245-FB5ABB3CACAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CF0D55B-D7FF-4E3A-9245-FB5ABB3CACAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CF0D55B-D7FF-4E3A-9245-FB5ABB3CACAB}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{8CF0D55B-D7FF-4E3A-9245-FB5ABB3CACAB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8CF0D55B-D7FF-4E3A-9245-FB5ABB3CACAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CF0D55B-D7FF-4E3A-9245-FB5ABB3CACAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CF0D55B-D7FF-4E3A-9245-FB5ABB3CACAB}.Release|ARM.ActiveCfg = Release|Any CPU
+		{8CF0D55B-D7FF-4E3A-9245-FB5ABB3CACAB}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPath = ..\..\..\..\packages\Unity.2.1.505.2\lib\NET35;..\..\..\..\packages\Unity.Interception.2.1.505.2\lib\NET35;..\..\..\..\packages\EnterpriseLibrary.Common.5.0.505.0\lib\NET35;..\..\..\..\packages\EnterpriseLibrary.Caching.5.0.505.0\lib\NET35
+	EndGlobalSection
+EndGlobal

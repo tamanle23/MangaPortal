@@ -2,62 +2,47 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1" />
         <title>Manga Portal</title>
-        <link rel="stylesheet" type="text/css" href="./style/index.css"/>
+        <link rel="stylesheet" type="text/css" href="./style/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="./style/bootstrap-theme.css"/>
         <link rel="stylesheet" type="text/css" href="./style/cmenu.css"/>
-        <script type="text/javascript" src="./cordova.android.js"></script>
-        <script type="text/javascript" src="./js/modernizr.js"></script>
-        <script type="text/javascript" src="./js/jquery.js"></script>
-        <script type="text/javascript" src="./js/lawnchair.js"></script>
-        <script type="text/javascript" src="./js/jquery.lazy.js"></script>
-        <script type="text/javascript" src="./js/jquery.cmenu.js"></script>
-        <script type="text/javascript" src="./js/jquery.spritely.js"></script>
-        <script type="text/javascript" src="./js/jquery.fittext.js"></script>
-        <script type="text/javascript" src="./js/knockout.js"></script>
-        <script type="text/javascript" src="./js/hammer.js"></script>
-        <script type="text/javascript" src="./js/knockouch.js"></script>
-        <script type="text/javascript" src="./ViewModels.js"></script>
-        <script type="text/javascript">
-									$(document).ready(function() {
-									$('.MenuItem .MenuItemText').fitText(1.1);
-									});
-        </script>
-    </head>
+        <link rel="stylesheet" type="text/css" href="./style/index.css"/>
+   </head>
     <body>
         <div class="Page ActivePage" id="HomeView" data-bind="with: HomeViewModel">
             <div class="TabContainer fulldefault" data-bind="swipeleft:SwipeLeft,swiperight:SwipeRight">
                 <div id="TabItems" class="cmenu-container">
                     <div class="cmenu-wrapper">
-                        <div class="MenuItem" id="HomeTab" >
-                            <img  src="./img/home128.10.png"  />
-                            <div class="MenuItemText">
-                                HISTORY
-                            </div>
-                        </div>
-                        <div class="MenuItem" id="ListTab">
-                            <img  src="./img/list128.10.png"   />
-                            <div class="MenuItemText">
-                                MANGA LIST
-                            </div>
-                        </div>
                         <div class="MenuItem" id="ListNewTab" >
-                            <img  src="./img/new128.10.png"  />
+                            <img  src="./img/new128.10.png"/>
                             <div class="MenuItemText">
                                 NEW
                             </div>
                         </div>
-                        <div class="MenuItem" id="SearchTab"	>
+                        <div class="MenuItem" id="ListTab">
+                            <img  src="./img/list128.10.png"/>
+                            <div class="MenuItemText">
+                                MANGA LIST
+                            </div>
+                        </div>
+                        <div class="MenuItem" id="HomeTab" >
+                            <img  src="./img/home128.10.png"/>
+                            <div class="MenuItemText">
+                                RECENT HISTORY
+                            </div>
+                        </div>
+                        <div class="MenuItem" id="SearchTab">
                             <img src="./img/search128.10.png"  />
                             <div class="MenuItemText">
                                 SEARCH
                             </div>
                         </div>
                     </div>
-                    <nav style="height:100%;display:block;z-index:999">
+                    <div style="height:100%;display:block;z-index:999">
                         <div class="cmenu-prev" style="position:absolute;width:20%;height:100%;left:0px;z-index:3;" data-bind="tap:SwipeRight"></div>
                         <div class="cmenu-next" style="position:absolute;width:20%;height:100%;right:0px;z-index:3;" data-bind="tap:SwipeLeft"></div>
-                    </nav>
+                    </div>
                 </div>
                 <div class="TabContentWrapper">
                     <div class="TabContent">
@@ -66,12 +51,12 @@
                                 <table>
                                     <tr>
                                         <td>
-                                        <input id="SearchTextBox" type="search" placeholder="Keyword ..."   data-bind="value: SearchText" />
+                                        <input id="SearchTextBox" placeholder="Keyword ..."   data-bind="value: SearchText" />
                                         </td>
                                         <td id="SearchBtnCell">
-                                        <button id="SearchButton" data-bind="tap: FindSeries">
+                                        <button class="btn btn-primary" data-bind="tap: FindSeries">
                                             Search
-                                        </button>
+                                        </button></td>
                                     </tr>
                                 </table>
                                 <h4 data-bind="text: SearchTextResult"></h4>
@@ -84,9 +69,8 @@
                                                 <tr>
                                                     <td class="ThumbnailInList">
                                                     <div>
-                                                        <img
-                                                        data-bind="attr: { src: 'data:image/jpg;base64,' + Thumbnail }"
-                                                        width="80" height="80"  alt />
+                                                        <img data-bind="attr: { src: Thumbnail }"
+                                                        width="80" height="80"/>
                                                     </div></td>
                                                     <td class="SeriesInfoInList fulldefault">
                                                     <div>
@@ -100,11 +84,41 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="TabPage" id="HomeTabContent">
+                            <div class="TabPageHeader"></div>
+                            <div class="TabPageContent">
+                                <ul data-bind="foreach: historySeries" class="MangaSeriesList">
+                                    <li data-bind="event: { tap: function (data, event) { $parent.OpenSeriesInfo(data, event, $data) } }">
+                                        <div class="MangaSeriesInfoList">
+                                            <table>
+                                                <tr>
+                                                    <td class="ThumbnailInList">
+                                                    <div>
+                                                        <img
+                                                        data-bind="attr: { src: Thumbnail }"
+                                                        width="80" height="80" alt="" />
+                                                    </div></td>
+                                                    <td class="SeriesInfoInList fulldefault">
+                                                    <div>
+                                                        <p data-bind="text: Name"></p>
+                                                        <p data-bind="text: NumberOfChapters + ' chapter'"></p>
+                                                    </div></td>
+                                                    <td style="width:25%">
+                                                    <div data-bind="with: currentChapter">
+                                                        <p data-bind="text: Name"></p>
+                                                    </div></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="TabPage" id="ListTabContent">
                             <div class="TabPageHeader">
                                 <div class="navigationBar">
                                     <a style="float: left;" data-bind="tap: Previous10series"> <img src="img/previous48.png" height="35" width="35" atl/>10 </a>
-                                    <a style="float: right" data-bind="tap: Next10series">10 <img src="img/next48.png" height="35" width="35" alt /> </a>
+                                    <a style="float: right" data-bind="tap: Next10series">10 <img src="img/next48.png" height="35" width="35"/> </a>
                                 </div>
                             </div>
                             <div class="TabPageContent">
@@ -117,7 +131,7 @@
                                                     <td class="ThumbnailInList">
                                                     <div>
                                                         <img
-                                                        data-bind="attr: { src: 'data:image/jpg;base64,' + Thumbnail }"
+                                                        data-bind="attr: { src: Thumbnail }"
                                                         width="80" height="80" alt="" />
                                                     </div></td>
                                                     <td class="SeriesInfoInList fulldefault">
@@ -144,7 +158,7 @@
                                                     <td class="ThumbnailInList">
                                                     <div>
                                                         <img
-                                                        data-bind="attr: { src: 'data:image/jpg;base64,' + Thumbnail }"
+                                                        data-bind="attr: { src: Thumbnail }"
                                                         width="80" height="80" alt="" />
                                                     </div></td>
                                                     <td class="SeriesInfoInList fulldefault">
@@ -156,39 +170,7 @@
                                                         <p data-bind="text: Date"></p>
                                                     </div></td>
                                                 </tr>
-                                                <tr></tr>
-                                            </table>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="TabPage" id="HomeTabContent">
-                            <div class="TabPageHeader"></div>
-                            <div class="TabPageContent">
-                                <ul data-bind="foreach: historySeries" class="MangaSeriesList">
-                                    <li
-                                    data-bind="event: { tap: function (data, event) { $parent.OpenSeriesInfo(data, event, $data) } }">
-                                        <div class="MangaSeriesInfoList">
-                                            <table>
-                                                <tr>
-                                                    <td class="ThumbnailInList">
-                                                    <div>
-                                                        <img
-                                                        data-bind="attr: { src: 'data:image/jpg;base64,' + Thumbnail }"
-                                                        width="80" height="80" alt="" />
-                                                    </div></td>
-                                                    <td class="SeriesInfoInList fulldefault">
-                                                    <div>
-                                                        <p data-bind="text: Name"></p>
-                                                        <p data-bind="text: NumberOfChapters + ' chapter'"></p>
-                                                    </div></td>
-                                                    <td style="width:25%">
-                                                    <div data-bind="with: currentChapter">
-                                                        <p data-bind="text: Name"></p>
-                                                    </div></td>
-                                                </tr>
-                                            </table>
+                                             </table>
                                         </div>
                                     </li>
                                 </ul>
@@ -204,12 +186,12 @@
                     <div class="TabContent">
                         <div class="TabPage" id="MangaSeriesInfoTabContent">
                             <div class="GlassButton" data-bind="tap: BackToHome" style="position:fixed;width:50px;height:50px;right:5px;top:0px;z-index:1" >
-                                <img src="img/backhome48.png" width="50" height="50" />
+                                <img src="img/expand48.png" width="50" height="50" />
                             </div>
                             <div class="TabPageContent" data-bind="with: SelectedSeries">
                                 <div>
                                     <img
-                                    data-bind="attr: { src: 'data:image/jpg;base64,' + Thumbnail }"
+                                    data-bind="attr: { src: Thumbnail }"
                                     style="width: 200px; height: 200px; display: block; float: left; padding-right: 20px"
                                     alt="" />
                                     <p data-bind="text: Name"></p>
@@ -226,7 +208,7 @@
                                                 <td style="width: 80px;">
                                                 <button class="smallthreeD"
                                                 data-bind="event: { touchstart: function (data, event) { $root.HomeViewModel.SelectChapter(data, event, $index ) } }">
-                                                    Đọc
+                                                    Read
                                                 </button></td>
                                             </tr>
                                         </tbody>
@@ -239,10 +221,11 @@
                                 <div style="position:fixed;width:80%;height:50px;top:0px;right:5%;z-index:1">
                                     <table>
                                         <tr>
-                                            <td width="60%">
+                                            <td>
                                             <div class="GlassButton" id="CloseFullScreenButton"   style="width:50px;height:50px;margin-left:auto;margin-right:auto;top:5px;">
-                                                <img src="img/expand48.png" width="100%" height="100%" data-bind="tap: CloseFullScreen"/>
-                                            </div></td>
+                                                <img src="img/expand48.png" data-bind="tap: CloseFullScreen"/>
+                                            </div>
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>
@@ -268,20 +251,6 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div style="width:80%;position:fixed;bottom:0px;right:0px">
-                                    <div id="AdContainer"></div>
-                                    <div>
-                                        <div style="position:fixed;width:100%;height:30px;bottom:40%;left:0%;right:0%;bottom:20px;">
-                                            <table>
-                                                <tr>
-                                                    <td width="40%" data-bind="with:SelectedChapter"><p data-bind="text:Name"></p></td>
-                                                    <td width="60%"></td>
-                                                    <td width="20%"></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -291,5 +260,24 @@
         <div id="BusyIndicator"  class="Page">
             <div style="height:102px;width:102px"></div>
         </div>
+        <script type="text/javascript" src="./cordova.android.js"></script>
+        <script type="text/javascript" src="./js/modernizr.js"></script>
+        <script type="text/javascript" src="./js/jquery.js"></script>
+        <script type="text/javascript" src="./js/bootstrap.js"></script>
+        <script type="text/javascript" src="./js/lawnchair.js"></script>
+        <script type="text/javascript" src="./js/jquery.lazy.js"></script>
+        <script type="text/javascript" src="./js/jquery.fittext.js"></script>
+        <script type="text/javascript" src="./js/jquery.cmenu.js"></script>
+        <script type="text/javascript" src="./js/jquery.spritely.js"></script>
+        
+        <script type="text/javascript" src="./js/knockout.js"></script>
+        <script type="text/javascript" src="./js/hammer.js"></script>
+        <script type="text/javascript" src="./js/knockouch.js"></script>
+        <script type="text/javascript" src="./spa.js"></script>
+        <script type="text/javascript">
+									$(document).ready(function() {
+									$('.MenuItem .MenuItemText').fitText(1);
+									});
+        </script>
     </body>
 </html>

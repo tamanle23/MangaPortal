@@ -20,29 +20,29 @@ namespace BlueWind.Crawler.Manga.Domain
         public ImageCache()
         {
         }
-        internal virtual MangaChapter HomeChapter { get; set; }
+        public virtual MangaChapter HomeChapter { get; set; }
     }
-    public class ImageCacheComparer : IEqualityComparer<ImageCache>
-    {
-        private static ImageCacheComparer comparer;
+    //public class ImageCacheComparer : IEqualityComparer<ImageCache>
+    //{
+    //    private static ImageCacheComparer comparer;
 
-        public static ImageCacheComparer Comparer
-        {
-            get
-            {
-                if (comparer == null) comparer = new ImageCacheComparer();
-                return ImageCacheComparer.comparer;
-            }
-            set { ImageCacheComparer.comparer = value; }
-        }
-        public bool Equals(ImageCache x, ImageCache y)
-        {
-            return x.Url == y.Url;
-        }
+    //    public static ImageCacheComparer Comparer
+    //    {
+    //        get
+    //        {
+    //            if (comparer == null) comparer = new ImageCacheComparer();
+    //            return ImageCacheComparer.comparer;
+    //        }
+    //        set { ImageCacheComparer.comparer = value; }
+    //    }
+    //    public bool Equals(ImageCache x, ImageCache y)
+    //    {
+    //        return x.Url == y.Url;
+    //    }
 
-        public int GetHashCode(ImageCache obj)
-        {
-            return obj.Url.GetHashCode();
-        }
-    }
+    //    public int GetHashCode(ImageCache obj)
+    //    {
+    //        return obj.Url.GetHashCode();
+    //    }
+    //}
 }

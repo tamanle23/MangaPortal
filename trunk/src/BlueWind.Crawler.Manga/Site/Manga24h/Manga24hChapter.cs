@@ -9,6 +9,7 @@ using System.Linq;
 using BlueWind.Crawler.Core;
 using System;
 using BlueWind.Crawler.Manga.Domain;
+using ProjectX.Common.Utility;
 
 namespace BlueWind.Crawler.Manga.Site.Manga24h
 {

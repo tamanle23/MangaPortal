@@ -60,7 +60,7 @@ namespace BlueWind.Crawler.Manga.Domain
 
         internal void UpdateChapters()
         {
-            using (var context = ServiceLocator.Current.GetInstance<SitesContext>())
+            using (var context = ServiceLocator.Current.GetInstance<MangaDataContext>())
             {
                 context.ObjContext().CommandTimeout = Int32.MaxValue;
                 foreach (var series in context.Series.Where(series => series.HomeSite.Id == this.Id & series.Status == (byte)ProgressStatus.Ongoing))
@@ -80,7 +80,7 @@ namespace BlueWind.Crawler.Manga.Domain
             if (MangaSeries == null)
                 if (crawlerParameter.UseDb)
                 {
-                    using (DbContext context = (DbContext)ServiceLocator.Current.GetInstance<SitesContext>())
+                    using (DbContext context = (DbContext)ServiceLocator.Current.GetInstance<MangaDataContext>())
                     {
                         context.Entry<MangaSite>(this).Collection<MangaSeries>(n => n.MangaSeries).Load();
                     }

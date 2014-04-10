@@ -149,9 +149,12 @@
         }
     };
 
+    
+    
+
     //Setting one of the predefined libraries as selected touch library.
     knockouch.init();
-    
+   
     window.knockouch = knockouch;
 
 }(this, ko));

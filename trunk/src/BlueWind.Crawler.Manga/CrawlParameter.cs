@@ -17,9 +17,8 @@ namespace BlueWind.Crawler.Manga
         public bool IsNeedClean { get; set; }
         public bool IsUpdateViewCount { get; set; }
         public bool IsUpdateChapters { get; set;}
-
         public bool IsValid { get; set; }
-
         public bool IsUpdateSeries { get; set; }
+        public string ConnectionString { get; set; }
     }
 }

@@ -1,11 +1,10 @@
-﻿using BlueWind.Common;
-using BlueWind.Crawler.Core;
+﻿using BlueWind.Crawler.Core;
 using BlueWind.Crawler.Core.Interfaces;
 using Microsoft.Practices.ServiceLocation;
+using ProjectX.Common.Utility;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity;
 using System.IO;
 
 namespace BlueWind.Crawler.Manga.Domain
@@ -15,7 +14,7 @@ namespace BlueWind.Crawler.Manga.Domain
         public MangaChapter()
         { }
 
-        internal virtual MangaSeries HomeSeries { get; set; }
+        public virtual MangaSeries HomeSeries { get; set; }
 
         public int Id
         {
@@ -55,7 +54,7 @@ namespace BlueWind.Crawler.Manga.Domain
             {
                 if (crawlerParameter.UseDb)
                 {
-                    using (var context = ServiceLocator.Current.GetInstance<SitesContext>())
+                    using (var context = ServiceLocator.Current.GetInstance<MangaDataContext>())
                     {
                         string commandText = "";
                         foreach (var page in GetPages())

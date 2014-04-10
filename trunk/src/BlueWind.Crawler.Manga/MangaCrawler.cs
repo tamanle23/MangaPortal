@@ -1,10 +1,10 @@
-﻿using BlueWind.Common;
-using BlueWind.Crawler.Core;
+﻿using BlueWind.Crawler.Core;
 using BlueWind.Crawler.Manga.Domain;
 using BlueWind.Crawler.Manga.Site.Manga24h;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
@@ -14,6 +14,7 @@ using System.Data.SqlServerCe;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace BlueWind.Crawler.Manga
 {
@@ -53,7 +54,7 @@ namespace BlueWind.Crawler.Manga
                 string siteName = arguments.Site.ToString();
                 if (arguments.UseDb)
                 {
-                    using (var context = ServiceLocator.Current.GetInstance<SitesContext>())
+                    using (var context = ServiceLocator.Current.GetInstance<MangaDataContext>())
                     {
 
                         if (context.Set<MangaSite>().Where(n => n.Name == siteName).Count() != 0)
@@ -63,7 +64,7 @@ namespace BlueWind.Crawler.Manga
                         else
                         {
                             context.Set<MangaSite>().Add(site);
-                            context.Save();
+                            context.SaveChanges();
                         }
                         if (context.IsFirstInitialization)
                             arguments.IsDeepScan = true;
@@ -95,30 +96,84 @@ namespace BlueWind.Crawler.Manga
             return watch.Elapsed;
         }
 
-        public static MangaCrawlParameter GetParameters(string[] args)
+        public static MangaCrawlParameter GetParameters(IDictionary<string,string> args)
         {
             var arguments = new MangaCrawlParameter();
-            if (args.Length > 1)
+            if (args != null)
             {
-                bool isValid = true;
-                BuiltInSites builtInSite = 0;
-                ProgressStatus status = 0;
-                isValid &= Enum.TryParse<BuiltInSites>(args[0], out builtInSite);
-                arguments.Site = builtInSite;
-                isValid &= Enum.TryParse<ProgressStatus>(args[1], out status);
-                arguments.Status = status;
+                if (args.Count() > 0)
+                {
+                    bool isValid = true;
+                    BuiltInSites builtInSite = 0;
+                    ProgressStatus status = 0;
+                    if (args.ContainsKey("site"))
+                        isValid &= Enum.TryParse<BuiltInSites>(args["site"], out builtInSite);
+                    arguments.Site = builtInSite;
+                    if (args.ContainsKey("status"))
+                        isValid &= Enum.TryParse<ProgressStatus>(args["status"], out status);
+                    arguments.Status = status;
 
-                if (args.Contains("/clean")) arguments.IsNeedClean = true;
-                if (args.Contains("/updateinfo")) arguments.IsUpdateInfo = true;
-                if (args.Contains("/updateviewcount")) arguments.IsUpdateViewCount = true;
-                if (args.Contains("/updatechapters")) arguments.IsUpdateChapters = true;
-                if (args.Contains("/scan")) arguments.IsScan = true;
-                if (args.Contains("/updateseries")) arguments.IsUpdateSeries = true;
-                if (args.Contains("/deep")) arguments.IsDeepScan = true;
-                if (args.Contains("/usedb")) arguments.UseDb = true;
-                arguments.IsValid = isValid;
+                    if (args.ContainsKey("cs")) arguments.ConnectionString = args["cs"];
+                    if (args.ContainsKey("clean")) arguments.IsNeedClean = true;
+                    if (args.ContainsKey("updateinfo")) arguments.IsUpdateInfo = true;
+                    if (args.ContainsKey("updateviewcount")) arguments.IsUpdateViewCount = true;
+                    if (args.ContainsKey("updatechapters")) arguments.IsUpdateChapters = true;
+                    if (args.ContainsKey("scan")) arguments.IsScan = true;
+                    if (args.ContainsKey("updateseries")) arguments.IsUpdateSeries = true;
+                    if (args.ContainsKey("deep")) arguments.IsDeepScan = true;
+                    if (args.ContainsKey("usedb")) arguments.UseDb = true;
+                    arguments.IsValid = isValid;
+                }
             }
             return arguments;
+        }
+        private class ParamComparer : IEqualityComparer<string>
+        {
+            public bool Equals(string x, string y)
+            {
+                return x.Split('=').FirstOrDefault() == y.Split('=').FirstOrDefault();
+            }
+
+            public int GetHashCode(string obj)
+            {
+                return obj.Split('=').FirstOrDefault().GetHashCode();
+            }
+        }
+
+        public static MangaCrawlParameter GetParameters(string iniFileName, bool isSelfHost=true)
+        {
+            var iniFilePath = Directory.GetParent(Assembly.GetExecutingAssembly().FullName).FullName + "\\" + iniFileName;
+            IEnumerable<string> parameters = null;
+            Dictionary<string, string> paramDic = null;
+
+            if (isSelfHost)
+            {
+                if (File.Exists(iniFilePath))
+                {
+                    parameters = File.ReadAllText(iniFilePath).Split('-').Select(m => m.Trim().Trim('\0', '\t', '\n', '\r')).Distinct(new ParamComparer());
+                }
+
+            }
+            else
+            {
+                parameters = ((String)System.Configuration.ConfigurationManager.AppSettings["Parameters"]).Split('-').Select(m=>m.Trim().Trim('\0','\t','\n','\r')).Distinct(new ParamComparer());
+            }
+            if(parameters!=null)
+            paramDic = parameters.ToDictionary(m => m.Split('=').FirstOrDefault(), m =>
+            {
+                var tmp = m.Split('=').Skip(1);
+                if (tmp.Count() > 0)
+                {
+                    if (tmp.Count() > 0)
+                        return tmp.Aggregate((part1, part2) => part1 + "=" + part2);
+                    else
+                        return tmp.FirstOrDefault();
+                }
+                else
+                    return null;
+            });
+
+            return MangaCrawler.GetParameters(paramDic);
         }
 
     }

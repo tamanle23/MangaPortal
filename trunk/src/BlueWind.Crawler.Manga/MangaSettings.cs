@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using ProjectX.Common.Utility;
 
 namespace BlueWind.Crawler.Manga
 {
-    public class MangaSettings : Dictionary<string,object>
+    public class MangaSettings : Settings
     {
         private static MangaSettings defaultInstance = new MangaSettings();
 
@@ -13,19 +13,15 @@ namespace BlueWind.Crawler.Manga
                 return defaultInstance;
             }
         }
-
-        public object this[string key]
+        
+        public string ConnectionString
         {
             get
             {
-                return base.ContainsKey(key)?base[key]:null;
+                return (string)this["ConnectionString"];
             }
-
-            set
-            {
-                if (base.ContainsKey(key))
-                    base[key] = value;
-                else base.Add(key, value);
+            set {
+                this["ConnectionString"] = value;            
             }
         }
     }

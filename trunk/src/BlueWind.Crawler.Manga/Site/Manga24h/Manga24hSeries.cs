@@ -1,8 +1,8 @@
-﻿using BlueWind.Common;
-using BlueWind.Crawler.Core;
+﻿using BlueWind.Crawler.Core;
 using BlueWind.Crawler.Manga.Domain;
 using HtmlAgilityPack;
 using Microsoft.Practices.ServiceLocation;
+using ProjectX.Common.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,6 +10,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using ProjectX.Common.Extensions;
 
 namespace BlueWind.Crawler.Manga.Site.Manga24h
 {
@@ -47,7 +48,7 @@ namespace BlueWind.Crawler.Manga.Site.Manga24h
         {
             var crawlerParameter = ServiceLocator.Current.GetInstance<MangaCrawlParameter>();
             var isSuccess = true;
-            using (DbContext context = (DbContext)ServiceLocator.Current.GetInstance<SitesContext>())
+            using (DbContext context = (DbContext)ServiceLocator.Current.GetInstance<MangaDataContext>())
             {
                 if (!(!crawlerParameter.UseDb || context == null))
                     context.Set<MangaSeries>().Attach(this);
@@ -74,13 +75,13 @@ namespace BlueWind.Crawler.Manga.Site.Manga24h
                             }
                             if (!(!crawlerParameter.UseDb || context == null))
                             {
-                                if (!context.Save())
+                                if (context.SaveChanges()<1)
                                     isSuccess = false;
                             }
                         }
                         catch (Exception exception)
                         {
-                            Logger.BeginWrite(exception);
+                            Logger.Write(exception);
                             isSuccess = false;
                         }
                     }
@@ -101,7 +102,7 @@ namespace BlueWind.Crawler.Manga.Site.Manga24h
             HtmlDocument document = new HtmlDocument();
             bool isUpdated = false;
             document.LoadHtml(HttpUtility.GetResponseString(base.SiteUri));
-            using (DbContext context = (DbContext)ServiceLocator.Current.GetInstance<SitesContext>())
+            using (DbContext context = (DbContext)ServiceLocator.Current.GetInstance<MangaDataContext>())
             {
                 context.Set<MangaSeries>().Attach(this);
                 context.Entry(this).Reference<MangaSite>(n => n.HomeSite).Load();
@@ -126,18 +127,18 @@ namespace BlueWind.Crawler.Manga.Site.Manga24h
                             isUpdated = true;
                             chapter = new Manga24hChapter(this.HomeSite.SiteUri + "/" + nodes[0].ChildNodes[0].Attributes["href"].Value, nodes[0].ChildNodes[0].InnerText, this, nodes[2].InnerText, nodes[1].InnerText);
                             context.Set<MangaChapter>().Add(chapter);
-                            context.Save();
+                            context.SaveChanges();
                             if (chapter.Scan())
                             { }
                         }
                         catch (Exception exception)
                         {
-                            Logger.BeginWrite(exception);
+                            Logger.Write(exception);
                         }
                     }
                     this.LastUpdatedSource = context.Entry(this).Collection(n=>n.MangaChapters).Query().Max(m => m.UpdatedDate);
-                    context.Save();
-                    Logger.BeginWrite(this.Name + " Updated. " + this.LastUpdatedSource);
+                    context.SaveChanges();
+                    Logger.Write(this.Name + " Updated. " + this.LastUpdatedSource);
                 }
             }
             return isUpdated;
@@ -168,7 +169,7 @@ namespace BlueWind.Crawler.Manga.Site.Manga24h
                     }
                     catch (Exception exception)
                     {
-                        Logger.BeginWrite(exception);
+                        Logger.Write(exception);
                     }
                 }
             }
@@ -182,31 +183,30 @@ namespace BlueWind.Crawler.Manga.Site.Manga24h
         {
             List<string> removeStrings = new List<string>(File.ReadAllLines("RemoveStrings.txt"));
             var crawlerParameter = ServiceLocator.Current.GetInstance<MangaCrawlParameter>();
-            using (DbContext context = (DbContext)ServiceLocator.Current.GetInstance<SitesContext>())
+            using (DbContext context = (DbContext)ServiceLocator.Current.GetInstance<MangaDataContext>())
             {
                 if (!(!crawlerParameter.UseDb || context == null))
-                    context.Set<MangaSeries>().Attach(this);
+                context.Set<MangaSeries>().Attach(this);
                 HtmlDocument doc = new HtmlDocument();
-
+                HtmlNode singleNode;
+                var xpath = "";
                 doc.LoadHtml(HttpUtility.GetResponseString(this.SiteUri));
-                if (this.ThumbnailBuffer == null)
+                if (doc.DocumentNode != null)
                 {
-                    var query = doc.DocumentNode.SelectSingleNode("//div[@class='span2']//img[@class='img-rounded'][1]");
-                    if (query != null)
+                    xpath = "//div[@class='col-md-3']//img[contains(@class,'img-rounded')][1]";
+                    singleNode = doc.DocumentNode.SelectSingleNode(xpath);
+                    if (singleNode != null)
                     {
-                        Stream stream = HttpUtility.GetResponse(query.Attributes["src"].Value);
-                        if (stream != null)
-                        {
-                            this.ThumbnailBuffer = stream.GetThumbnail(80, 80);
-                            if (!(!crawlerParameter.UseDb || context == null))
-                                context.Save();
-                        }
+                        this.ThumbnailUrl = singleNode.Attributes["src"].Value;
+                        if (!(!crawlerParameter.UseDb || context == null))
+                            context.SaveChanges();
                     }
                 }
                 if (this.Status != (byte)ProgressStatus.Completed)
                 {
-                    var query = doc.DocumentNode.SelectSingleNode("//div[@class='span5']//ul[@class='mangainfo']//span[@class='info_tinhtrang'][1]");
-                    switch (query.InnerText)
+                    xpath = "div[@class='col-md-9']//ul[@class='mangainfo']//span[@class='info_tinhtrang'][1]";
+                    singleNode = doc.DocumentNode.SelectSingleNode(xpath);
+                    switch (singleNode.InnerText)
                     {
                         case "Hoàn Thành":
                             this.Status = (byte)ProgressStatus.Completed;
@@ -222,29 +222,24 @@ namespace BlueWind.Crawler.Manga.Site.Manga24h
                             break;
                     }
                     if (!(!crawlerParameter.UseDb || context == null))
-                        context.Save();
+                        context.SaveChanges();
                 }
                 if (this.Overview == null || this.Overview == "")
                 {
-                    var query = doc.DocumentNode.SelectNodes("//div[@class='span8']/p//p");
+                    xpath="//div[@class='col-md-9'][1]//..//div[5]";
+                    singleNode = doc.DocumentNode.SelectSingleNode(xpath);
 
-                    if (query != null)
+                    if (singleNode != null)
                     {
-                        if (query.Count > 1)
-                        {
-                            var builder = new StringBuilder(System.Web.HttpUtility.HtmlDecode(query.Skip(1).Select(n => n.InnerText).Aggregate(
-                                (n, m) =>
-                                {
-                                    return n + "\n" + m;
-                                })));
+                        var builder = new StringBuilder(System.Web.HttpUtility.HtmlDecode(singleNode.ChildNodes.Select(n => n.InnerText).Aggregate((m, n) => m.Trim('\r', '\n') + "\r\n" + n.Trim('\r', '\n'))));
                             foreach (string item in removeStrings)
                             {
                                 builder.Replace(item, "");
                             }
                             this.Overview = builder.ToString();
                             if (!(!crawlerParameter.UseDb || context == null))
-                                context.Save();
-                        }
+                                context.SaveChanges();
+                        
                     }
                 }
             }

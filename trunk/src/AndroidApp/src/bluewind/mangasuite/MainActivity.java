@@ -1,12 +1,9 @@
 package bluewind.mangasuite;
 
-import java.util.Timer;
-import java.util.TimerTask;
 import org.apache.cordova.DroidGap;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.*;
-import android.widget.LinearLayout;
+
 
 public class MainActivity extends DroidGap
 {

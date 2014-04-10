@@ -2,11 +2,13 @@
 using BlueWind.Crawler.Manga.Domain;
 using HtmlAgilityPack;
 using Microsoft.Practices.ServiceLocation;
+using ProjectX.Common.Utility;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace BlueWind.Crawler.Manga.Site.Manga24h
 {
@@ -35,7 +37,7 @@ namespace BlueWind.Crawler.Manga.Site.Manga24h
         {
             var crawlerParameter = ServiceLocator.Current.GetInstance<MangaCrawlParameter>();
             bool isSuccess = true;
-            using (DbContext context = (DbContext)ServiceLocator.Current.GetInstance<SitesContext>())
+            using (DbContext context = (DbContext)ServiceLocator.Current.GetInstance<MangaDataContext>())
             {
                 if (!(!crawlerParameter.UseDb || context == null))
                     context.Set<MangaSite>().Attach(this);
@@ -81,7 +83,7 @@ namespace BlueWind.Crawler.Manga.Site.Manga24h
                             }
                             if (!(!crawlerParameter.UseDb || context == null))
                             {
-                                if (!context.Save())
+                                if (context.SaveChanges()<1)
                                     isSuccess = false;
                             }
                         }
@@ -93,7 +95,16 @@ namespace BlueWind.Crawler.Manga.Site.Manga24h
 
         public override void UpdateInfo()
         {
-            foreach (var series in MangaSeries)
+            var crawlerParameter = ServiceLocator.Current.GetInstance<MangaCrawlParameter>();
+            using (DbContext context = (DbContext)ServiceLocator.Current.GetInstance<MangaDataContext>())
+            {
+                if (!(!crawlerParameter.UseDb || context == null))
+                {
+                    context.Set<MangaSite>().Attach(this);
+                    context.Entry<MangaSite>(this).Collection(n => n.MangaSeries).Load();
+                }
+            }
+            foreach (var series in MangaSeries.ToList())
             {
                 series.UpdateInfo();
             }
@@ -103,7 +114,7 @@ namespace BlueWind.Crawler.Manga.Site.Manga24h
         {
             var crawlerParameter = ServiceLocator.Current.GetInstance<MangaCrawlParameter>();
             bool isSuccess = true;
-            using (DbContext context = (DbContext)ServiceLocator.Current.GetInstance<SitesContext>())
+            using (DbContext context = (DbContext)ServiceLocator.Current.GetInstance<MangaDataContext>())
             {
                 if (!(!crawlerParameter.UseDb || context == null))
                     context.Set<MangaSite>().Attach(this);
@@ -152,7 +163,7 @@ namespace BlueWind.Crawler.Manga.Site.Manga24h
                             }
                             if (!(!crawlerParameter.UseDb || context == null))
                             {
-                                if (!context.Save())
+                                if (context.SaveChanges()<1)
                                     isSuccess = false;
                             }
                         }
@@ -166,7 +177,7 @@ namespace BlueWind.Crawler.Manga.Site.Manga24h
             List<string> removeStrings = new List<string>(File.ReadAllLines("RemoveStrings.txt"));
             HtmlDocument doc = new HtmlDocument();
             var crawlerParameter = ServiceLocator.Current.GetInstance<MangaCrawlParameter>();
-            using (DbContext context = (DbContext)ServiceLocator.Current.GetInstance<SitesContext>())
+            using (DbContext context = (DbContext)ServiceLocator.Current.GetInstance<MangaDataContext>())
             {
                 if (!(!crawlerParameter.UseDb || context == null))
                     context.Set<MangaSite>().Attach(this);
@@ -191,7 +202,7 @@ namespace BlueWind.Crawler.Manga.Site.Manga24h
                     //    series.LastUpdatedSource = query.InnerText;
                     //}
                     if (!(!crawlerParameter.UseDb || context == null))
-                        context.Save();
+                        context.SaveChanges();
                 }
             }
         }

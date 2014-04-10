@@ -193,45 +193,59 @@ namespace BlueWind.Crawler.Manga.Site.Manga24h
                 doc.LoadHtml(HttpUtility.GetResponseString(this.SiteUri));
                 if (doc.DocumentNode != null)
                 {
-                    xpath = "//div[@class='col-md-3']//img[contains(@class,'img-rounded')][1]";
-                    singleNode = doc.DocumentNode.SelectSingleNode(xpath);
-                    if (singleNode != null)
+                    if (this.ThumbnailUrl == null || this.ThumbnailUrl == "")
                     {
-                        this.ThumbnailUrl = singleNode.Attributes["src"].Value;
-                        if (!(!crawlerParameter.UseDb || context == null))
-                            context.SaveChanges();
+                        xpath = "//div[@class='col-md-3']//img[contains(@class,'img-rounded')][1]";
+                        singleNode = doc.DocumentNode.SelectSingleNode(xpath);
+                        if (singleNode != null)
+                        {
+                            this.ThumbnailUrl = singleNode.Attributes["src"].Value;
+                            if (!(!crawlerParameter.UseDb || context == null))
+                                context.SaveChanges();
+                        }
+                        else
+                        {
+                            Logger.Write(LogLevel.Trace, this.SiteUri + "- thumbnail - xpath's wrong.", null);
+                        }
                     }
-                }
-                if (this.Status != (byte)ProgressStatus.Completed)
-                {
-                    xpath = "div[@class='col-md-9']//ul[@class='mangainfo']//span[@class='info_tinhtrang'][1]";
-                    singleNode = doc.DocumentNode.SelectSingleNode(xpath);
-                    switch (singleNode.InnerText)
-                    {
-                        case "Hoàn Thành":
-                            this.Status = (byte)ProgressStatus.Completed;
-                            break;
-                        case "Đang Tiến Hành":
-                            this.Status = (byte)ProgressStatus.Ongoing;
-                            break;
-                        case "Tạm Ngưng":
-                            this.Status = (byte)ProgressStatus.Suspended;
-                            break;
-                        default:
-                            this.Status = (byte)ProgressStatus.Unknown;
-                            break;
-                    }
-                    if (!(!crawlerParameter.UseDb || context == null))
-                        context.SaveChanges();
-                }
-                if (this.Overview == null || this.Overview == "")
-                {
-                    xpath="//div[@class='col-md-9'][1]//..//div[5]";
-                    singleNode = doc.DocumentNode.SelectSingleNode(xpath);
 
-                    if (singleNode != null)
+                    if (this.Status != (byte)ProgressStatus.Completed)
                     {
-                        var builder = new StringBuilder(System.Web.HttpUtility.HtmlDecode(singleNode.ChildNodes.Select(n => n.InnerText).Aggregate((m, n) => m.Trim('\r', '\n') + "\r\n" + n.Trim('\r', '\n'))));
+                        xpath = "//div[@class='col-md-9']//ul[@class='mangainfo']//span[@class='info_tinhtrang'][1]";
+                        singleNode = doc.DocumentNode.SelectSingleNode(xpath);
+                        if (singleNode != null)
+                        {
+                            switch (singleNode.InnerText)
+                            {
+                                case "Hoàn Thành":
+                                    this.Status = (byte)ProgressStatus.Completed;
+                                    break;
+                                case "Đang Tiến Hành":
+                                    this.Status = (byte)ProgressStatus.Ongoing;
+                                    break;
+                                case "Tạm Ngưng":
+                                    this.Status = (byte)ProgressStatus.Suspended;
+                                    break;
+                                default:
+                                    this.Status = (byte)ProgressStatus.Unknown;
+                                    break;
+                            }
+                            if (!(!crawlerParameter.UseDb || context == null))
+                                context.SaveChanges();
+                        }
+                        else
+                        {
+                            Logger.Write(LogLevel.Trace, this.SiteUri+"- info_tinhtrang - xpath's wrong.", null);
+                        }
+                    }
+                    if (this.Overview == null || this.Overview == "")
+                    {
+                        xpath = "//div[@class='col-md-9'][1]//..//div[5]";
+                        singleNode = doc.DocumentNode.SelectSingleNode(xpath);
+
+                        if (singleNode != null)
+                        {
+                            var builder = new StringBuilder(System.Web.HttpUtility.HtmlDecode(singleNode.ChildNodes.Select(n => n.InnerText).Aggregate((m, n) => m.Trim('\r', '\n') + "\r\n" + n.Trim('\r', '\n'))));
                             foreach (string item in removeStrings)
                             {
                                 builder.Replace(item, "");
@@ -239,7 +253,12 @@ namespace BlueWind.Crawler.Manga.Site.Manga24h
                             this.Overview = builder.ToString();
                             if (!(!crawlerParameter.UseDb || context == null))
                                 context.SaveChanges();
-                        
+
+                        }
+                        else
+                        {
+                            Logger.Write(LogLevel.Trace, this.SiteUri + "- overview - xpath's wrong.", null);
+                        }
                     }
                 }
             }

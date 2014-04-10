@@ -23,10 +23,6 @@ body
 	font-family: Verdana, Arial, Geneva, 'DejaVu Sans', sans-serif;
 }
 
-button:hover, .button:hover, input[type="button"]:hover
-{
-	background-image: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.03));
-}
 #SeriesView .TabContentWrapper
 {
 	top: 0px;
@@ -67,7 +63,12 @@ button:hover, .button:hover, input[type="button"]:hover
 	font-weight: bold;
 	font-size: 24px;
 }
-
+.RefreshButton
+{
+	position:absolute;
+	right:10px;
+	bottom:10px;
+}
 #SearchTextBox
 {
 	width: 100%;
@@ -88,18 +89,7 @@ h4
 {
 	margin: 3px;
 }
-button, .button, input[type="button"]
-{
-	padding: 0 30px 0 30px;
-	height: 48px;
-	border: none;
-	border-radius: 3px;
-	background-color: #f4f4f4;
-	background-image: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.01));
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 1px 2px rgba(0, 0, 0, 0.5);
-	cursor: pointer;
-	-webkit-transition: .1s;
-}
+
 .TabPage
 {
 	bottom: 0px;
@@ -117,13 +107,7 @@ h1:hover
 	width: 80px;
 	height: 100%;
 }
-button:active, .button:active, input[type="button"]:active
-{
-	background-image: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.12));
-	color: #333;
-	-webkit-text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
-	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
-}
+
 #ListTabContent .TabPageContent
 {
 	top: 50px;
@@ -219,12 +203,7 @@ p
 	padding: 0px;
 	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
 }
-button.smallthreeD, .button .smallthreeD, input[type="button"].bsmallthreeD
-{
-	padding-bottom: 3px;
-	height: 35px;
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), inset 0 -3px 0 rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.5);
-}
+
 td.SeriesInfoInList
 {
 	margin: 10px;
@@ -251,20 +230,13 @@ td.SeriesInfoInList
 {
 	top: 20px;
 }
-#MangaSeriesInfoTabContent > .TabPageContent > div:first-child
-{
-	overflow-y: auto;
-	height: 250px;
-}
+
 .fulldefault
 {
 	width: 100%;
 	height: 100%;
 }
-button.small, .button .bsmall, input[type="button"].bsmall
-{
-	height: 32px;
-}
+
 #List17PlusTabContent .TabPageContent
 {
 	top: 50px;
@@ -284,29 +256,11 @@ button.small, .button .bsmall, input[type="button"].bsmall
 {
 	height: 100%;
 }
-button.smallthreeD:active, .button .smallthreeD:active, input[type="button"].smallthreeD:active
-{
-	position: relative;
-	top: 1px;
-	height: 35px;
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.75);
-}
-button.threeD:active, .button .threeD:active, input[type="button"].threeD:active
-{
-	position: relative;
-	top: 1px;
-	height: 51px;
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), inset 0 -2px 0 rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.75);
-}
-button.threeD, .button .threeD, input[type="button"].threeD
-{
-	padding-bottom: 4px;
-	height: 52px;
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), inset 0 -4px 0 rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.5);
-}
+
 .PageList ul
 {
 	list-style-type: none;
+	padding:0px;
 }
 .PageList ul li
 {
@@ -383,6 +337,11 @@ h1
 #ChapterViewTabContent .TabPageContent
 {
 	top: 0px;
+}
+#MangaSeriesInfoTabContent > .TabPageContent > div:first-child
+{
+	overflow-y: auto;
+	height: 250px;
 }
 .fullinherit
 {

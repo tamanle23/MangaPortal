@@ -74,7 +74,6 @@
     <Compile Include="Domain\MangaChapter.cs" />
     <Compile Include="Domain\MangaSeries.cs" />
     <Compile Include="Domain\MangaSite.cs" />
-    <Compile Include="MangaSettings.cs" />
     <Compile Include="Migrations\201404070459410_InitialCreate.cs" />
     <Compile Include="Migrations\201404070459410_InitialCreate.Designer.cs">
       <DependentUpon>201404070459410_InitialCreate.cs</DependentUpon>

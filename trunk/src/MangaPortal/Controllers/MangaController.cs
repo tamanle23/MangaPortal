@@ -10,7 +10,11 @@ using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Web.Http;
@@ -38,7 +42,6 @@ namespace MangaPortal.Controllers
 
         public MangaController()
         {
-           
         }
 
         public static void Refresh()
@@ -54,6 +57,8 @@ namespace MangaPortal.Controllers
         }
 
         private static object _lock = new object();
+
+    
 
         [HttpGet]
         [ApiCache(2000000, 1000000, false)]

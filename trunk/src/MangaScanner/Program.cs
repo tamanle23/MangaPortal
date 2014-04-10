@@ -27,10 +27,6 @@ namespace MangaScanner
             container.RegisterType<MangaDataContext>("SitesContext");
             LogPath = String.Format("ApplicationSessionLog_{0:yyyyMMddHHmmss}.log", DateTime.Now);
             Logger.LogAction = LogCallback;
-            Logger.LogAction = (message, level, ex) =>
-            {
-                Console.WriteLine(message);
-            };
         }
 
         private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -46,15 +42,11 @@ namespace MangaScanner
             }
             switch (level)
             {
+                case LogLevel.Trace:
                 case LogLevel.Error:
-                    Console.WriteLine(message);
-                    File.WriteAllText(LogPath, "\n" + String.Format("---------- {0} {1} ----------", message, DateTime.Now.ToLongDateString()));
+                case LogLevel.UserDefining:
                     File.AppendAllText(LogPath, "\r\n" + String.Format("{0} [{1}] {2}", DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss"), level, message));
                     File.AppendAllText(LogPath, GetExceptionText(ex));
-                    break;
-
-                case LogLevel.UserDefining:
-                    Console.WriteLine(message);
                     break;
             }
         }
@@ -62,17 +54,15 @@ namespace MangaScanner
         private static void Main(string[] args)
         {
             container.RegisterInstance<MangaCrawlParameter>(MangaCrawler.GetParameters("mangascanner.ini"));
-            //MangaSettings.Default["ConnectionString"] = "data source=" + System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase) + "\\Manga.sdf;Persist Security Info=False;";
-            //MangaSettings.Default["ConnectionString"] = "data source=.\\SQLEXPRESS;database=Manga;multipleactiveresultsets=True;Integrated Security=true";
-            //var taskSchedule = new PriorityScheduler(System.Threading.ThreadPriority.Lowest);
-            //var taskFactory = new TaskFactory(taskSchedule);
-            //var task = taskFactory.StartNew(() =>
-            //{
+            var taskSchedule = new PriorityScheduler(System.Threading.ThreadPriority.Lowest);
+            var taskFactory = new TaskFactory(taskSchedule);
+            var task = taskFactory.StartNew(() =>
+            {
                 var timespan = MangaCrawler.Crawl();
                 Console.WriteLine(String.Format("======== {0}", timespan.TotalHours));
                 Console.ReadLine();
-            //});
-            //task.Wait();
+            });
+            task.Wait();
         }
 
         private static string GetExceptionText(Exception ex, int count = 0)

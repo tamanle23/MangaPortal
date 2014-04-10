@@ -145,6 +145,9 @@
                                         </div>
                                     </li>
                                 </ul>
+                                 <div data-bind="tap: RefreshSeriesList" style="position:fixed;width:10%;right:10px;bottom:10px;z-index:1;" >
+                                <img src="img/refresh128.png" width="100%" />
+                            </div>
                             </div>
                         </div>
                         <div class="TabPage" id="ListNewTabContent">
@@ -174,6 +177,9 @@
                                         </div>
                                     </li>
                                 </ul>
+                                 <div data-bind="tap: RefreshTopNewList" style="position:fixed;width:10%;right:10px;bottom:10px;z-index:1;" >
+                                <img src="img/refresh128.png" width="100%"  />
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -206,7 +212,7 @@
                                                 style="text-wrap: normal; border-top: 1px solid #333; height: 50px;"><p data-bind="text: Name"></p></td>
                                                 <td style="width: 100px; border-top: 1px solid #333;"><p data-bind="text: Date"></p></td>
                                                 <td style="width: 80px;">
-                                                <button class="smallthreeD"
+                                                <button class="btn btn-default" 
                                                 data-bind="event: { touchstart: function (data, event) { $root.HomeViewModel.SelectChapter(data, event, $index ) } }">
                                                     Read
                                                 </button></td>
@@ -222,8 +228,8 @@
                                     <table>
                                         <tr>
                                             <td>
-                                            <div class="GlassButton" id="CloseFullScreenButton"   style="width:50px;height:50px;margin-left:auto;margin-right:auto;top:5px;">
-                                                <img src="img/expand48.png" data-bind="tap: CloseFullScreen"/>
+                                            <div class="GlassButton" id="CloseFullScreenButton" data-bind="tap: CloseFullScreen"  style="width:50px;height:50px;margin-left:auto;margin-right:auto;top:5px;">
+                                                <img src="img/expand48.png" />
                                             </div>
                                             </td>
                                         </tr>
@@ -247,7 +253,7 @@
                                 <div class="PageList" data-bind="pinchin:PinchIn,pinchout:PinchOut">
                                     <ul data-bind="foreach: PageList">
                                         <li>
-                                            <img class="lazy" data-bind="attr: {'data-src': Url }"  src="img/loading.gif" />
+                                            <img class="lazy" data-bind="attr: {'data-src': Url }" style="min-width:5%" src="img/loading.gif"/>
                                         </li>
                                     </ul>
                                 </div>

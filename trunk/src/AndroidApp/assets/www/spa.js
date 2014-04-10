@@ -60,14 +60,14 @@
                 {
                     if (!self.IsHasData)
                     {
-                        self.isBusy = true;
-                        self.GetNumberOfSeries();
+                        //self.isBusy = true;
+                        //self.GetNumberOfSeries();
                     }
                 }
             }
             if (indent == "ListNewTab")
             {
-                self.GetTopNew50();
+                //self.GetTopNew50();
             }
             if (current)
             {
@@ -78,6 +78,18 @@
 						"none");
             }
             $("#" + indent + "Content").css("display", "block");
+        };
+        self.InitContent = function()
+        {
+            self.GetTopNew50(self.GetNumberOfSeries);
+        };
+        self.RefreshSeriesList=function()
+        {
+            self.GetSeriesPart(self.seriesPart);
+        };
+        self.RefreshTopNewList=function()
+        {
+            self.GetTopNew50();
         };
         self.OpenSeriesInfo = function (data, event, selectedItem)
         {
@@ -100,9 +112,11 @@
                         },
                         error: function (e)
                         {
+                            self.ShowApiRequestError();
                         },
                         complete: function (data)
                         {
+                            $("#BusyIndicator").hide();
                         }
                     });
                     self.OpenPage('SeriesView');
@@ -110,11 +124,11 @@
                 },
                 error: function (e)
                 {
-                    alert('Cannot access manga info.');
+                    self.ShowApiRequestError();
+                    $("#BusyIndicator").hide();
                 },
                 complete: function (data)
-                {
-                    $("#BusyIndicator").hide();
+                {                
                 }
             });
         };
@@ -156,7 +170,7 @@
                 },
                 error: function (e)
                 {
-
+                    self.ShowApiRequestError();
                 },
                 complete: function (data)
                 {
@@ -165,7 +179,7 @@
                 }
             });
         }
-        self.GetTopNew50 = function ()
+        self.GetTopNew50 = function (callback)
         {
             $("#BusyIndicator").show();
             $.ajax({
@@ -182,13 +196,20 @@
                 },
                 error: function (e)
                 {
+                    self.ShowApiRequestError();
                 },
                 complete: function (data)
                 {
                     self.isBusy=false;
                     $("#BusyIndicator").hide();
+                    if(typeof(callback) =="function" && callback!=null)
+                	callback();
                 }
             });
+        };
+        self.ShowApiRequestError=function()
+        {
+            alert("Network's not available. Please check internet connection!");  
         };
         self.GetSeriesPart = function (seed)
         {
@@ -211,6 +232,7 @@
                 },
                 error: function (e)
                 {
+                    self.ShowApiRequestError();
                 },
                 complete: function (data)
                 {
@@ -259,6 +281,7 @@
                 },
                 error: function (e)
                 {
+                    self.ShowApiRequestError();
                 },
                 complete: function (data)
                 {
@@ -291,6 +314,7 @@
                 },
                 error: function (e)
                 {
+                    self.ShowApiRequestError();
                 },
                 complete: function (data)
                 {
@@ -445,6 +469,7 @@
         jQuery.support.cors = true;
         ko.applyBindings(window.ViewModels);
         $("#BusyIndicator div").sprite({ fps: 12, no_of_frames: 8 });
+        window.ViewModels.HomeViewModel.InitContent();
         
      });
 })();

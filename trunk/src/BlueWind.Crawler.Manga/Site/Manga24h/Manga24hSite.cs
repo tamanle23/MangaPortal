@@ -106,7 +106,10 @@ namespace BlueWind.Crawler.Manga.Site.Manga24h
             }
             foreach (var series in MangaSeries.ToList())
             {
-                series.UpdateInfo();
+                if (series == null)
+                    Logger.Write("Null Series!");
+                else
+                    series.UpdateInfo();
             }
         }
 

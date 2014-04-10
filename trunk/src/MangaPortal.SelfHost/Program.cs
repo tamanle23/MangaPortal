@@ -13,7 +13,6 @@ namespace MangaPortal.SelfHost
     {
         static void Main(string[] args)
         {
-
             Bootstrapper.Initialize(true);
             Console.WriteLine("Press Enter to quit.");
             Console.ReadLine();

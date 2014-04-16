@@ -193,6 +193,8 @@
                         self.topNew50List.push(data[i]);
                     }
                     $(".TabPageContent").scrollTop();
+                    if(typeof(callback) =="function" && callback!=null)
+                    	callback();
                 },
                 error: function (e)
                 {
@@ -202,9 +204,7 @@
                 {
                     self.isBusy=false;
                     $("#BusyIndicator").hide();
-                    if(typeof(callback) =="function" && callback!=null)
-                	callback();
-                }
+                S}
             });
         };
         self.ShowApiRequestError=function()

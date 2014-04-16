@@ -9,7 +9,7 @@
     $.cmenu.defaults =
     {
 	current : 0, // index of current item
-	interval : 100
+	interval : 30
     // time between transitions
     };
     $.cmenu.$left3DCss =

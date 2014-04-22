@@ -51,7 +51,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                        <input id="SearchTextBox" placeholder="Keyword ..."   data-bind="value: SearchText" />
+                                        <input id="SearchTextBox" placeholder="Keyword ..."   data-bind="value: searchText" />
                                         </td>
                                         <td id="SearchBtnCell">
                                         <button class="btn btn-primary" data-bind="tap: FindSeries">
@@ -59,7 +59,7 @@
                                         </button></td>
                                     </tr>
                                 </table>
-                                <h4 data-bind="text: SearchTextResult"></h4>
+                                <h4 data-bind="text: searchTextResult"></h4>
                             </div>
                             <div class="TabPageContent">
                                 <ul data-bind="foreach: searchResultList" class="MangaSeriesList">
@@ -194,7 +194,7 @@
                             <div class="GlassButton" data-bind="tap: BackToHome" style="position:fixed;width:50px;height:50px;right:5px;top:0px;z-index:1" >
                                 <img src="img/expand48.png" width="50" height="50" />
                             </div>
-                            <div class="TabPageContent" data-bind="with: SelectedSeries">
+                            <div class="TabPageContent" data-bind="with: selectedSeries">
                                 <div>
                                     <img
                                     data-bind="attr: { src: Thumbnail }"
@@ -251,7 +251,7 @@
                                     </table>
                                 </div>
                                 <div class="PageList" data-bind="pinchin:PinchIn,pinchout:PinchOut">
-                                    <ul data-bind="foreach: PageList">
+                                    <ul data-bind="foreach: pageList">
                                         <li>
                                             <img class="lazy" data-bind="attr: {'data-src': Url }" style="min-width:5%" src="img/loading.gif"/>
                                         </li>
